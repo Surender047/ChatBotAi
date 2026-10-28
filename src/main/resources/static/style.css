@@ -1,0 +1,285 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f7f9fc;
+    color: #1f2937;
+}
+
+
+/* Main application */
+
+.app {
+    width: 100%;
+    max-width: 900px;
+    min-height: 100vh;
+
+    margin: auto;
+    padding: 30px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* -------------------------
+   Welcome Screen
+------------------------- */
+
+.welcome {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    transition: all 0.4s ease;
+}
+
+
+.robot {
+    font-size: 55px;
+}
+
+
+.welcome h1 {
+    margin: 10px 0 5px;
+    font-size: 32px;
+}
+
+
+.welcome p {
+    color: #6b7280;
+    margin-bottom: 35px;
+}
+
+
+/* Hide welcome after first message */
+
+.welcome.hidden {
+    display: none;
+}
+
+
+/* -------------------------
+   Conversation
+------------------------- */
+
+.conversation {
+    width: 100%;
+
+    display: none;
+
+    flex-direction: column;
+
+    gap: 25px;
+
+    padding-bottom: 120px;
+}
+
+
+.conversation.active {
+    display: flex;
+}
+
+
+/* Message */
+
+.message {
+    width: 100%;
+}
+
+
+.label {
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+
+/* User */
+
+.user-message {
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    padding: 16px 20px;
+
+    border-radius: 12px;
+
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+
+/* AI */
+
+.ai-message {
+    background: #eef5ff;
+
+    padding: 20px;
+
+    border-radius: 12px;
+
+    line-height: 1.7;
+
+    white-space: pre-wrap;
+}
+
+
+/* -------------------------
+   Input box
+------------------------- */
+
+.input-container {
+
+    width: 100%;
+
+    display: flex;
+
+    background: white;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 14px;
+
+    padding: 8px;
+
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+
+    transition: all 0.4s ease;
+}
+
+
+/* Initial position */
+
+.welcome + .conversation + .input-container {
+    margin-bottom: 40px;
+}
+
+
+.input-container input {
+
+    flex: 1;
+
+    border: none;
+    outline: none;
+
+    padding: 14px;
+
+    font-size: 16px;
+
+    background: transparent;
+}
+
+
+.input-container button {
+
+    width: 48px;
+    height: 48px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #2563eb;
+
+    color: white;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.input-container button:hover {
+    background: #1d4ed8;
+}
+
+
+.input-container button:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+}
+
+
+/* After chat starts */
+
+.app.chat-started .input-container {
+
+    position: fixed;
+
+    bottom: 20px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    max-width: 840px;
+}
+
+
+/* -------------------------
+   Loading animation
+------------------------- */
+
+.loading {
+    display: flex;
+    gap: 5px;
+}
+
+
+.loading span {
+
+    width: 8px;
+    height: 8px;
+
+    background: #6b7280;
+
+    border-radius: 50%;
+
+    animation: bounce 1.4s infinite;
+}
+
+
+.loading span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+
+.loading span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+
+@keyframes bounce {
+
+    0%, 80%, 100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-7px);
+    }
+}
+
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    .app {
+        padding: 20px;
+    }
+
+    .app.chat-started .input-container {
+        width: calc(100% - 30px);
+    }
+
+}
