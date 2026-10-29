@@ -1,6 +1,8 @@
 package com.AiTest.chatBot.Controller;
 
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,9 +26,17 @@ public class ChatController {
 
 	@PostMapping("/chat")
 	public Answer ChatResponse(@RequestBody Message message) {
-		log.info("Question Asked");
-		String answer = clientService.ask(message.getMessage());
+		log.info("Question Asked " +message.getChatId());
+		String answer = clientService.ask(message.getMessage(),message.getChatId());
 		log.info("Ai Answered");
 		return new Answer(answer);
+	}
+	
+	@DeleteMapping("/chat/{conversationId}")
+	public void clearConversation(@PathVariable String conversationId) {
+
+	    log.info("Clearing conversation {}", conversationId);
+
+	    clientService.clearConversation(conversationId);
 	}
 }

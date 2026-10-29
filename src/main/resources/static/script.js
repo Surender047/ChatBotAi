@@ -3,8 +3,7 @@ const conversation = document.getElementById("conversation");
 const welcome = document.getElementById("welcome");
 const sendButton = document.getElementById("sendButton");
 const app = document.querySelector(".app");
-
-
+let chatId = crypto.randomUUID();
 async function sendMessage() {
 
     const message = input.value.trim();
@@ -34,7 +33,12 @@ async function sendMessage() {
 
     // Show loading
     const loadingMessage = addLoadingMessage();
+	document.getElementById("newChatBtn").addEventListener("click", () => {
 
+	    chatId = crypto.randomUUID();
+
+	    console.log("New chat:", chatId);
+	});
 
     try {
 
@@ -47,7 +51,8 @@ async function sendMessage() {
             },
 
             body: JSON.stringify({
-                message: message
+                message: message,
+				 chatId : chatId
             })
 
         });
